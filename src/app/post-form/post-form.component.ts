@@ -1,5 +1,12 @@
 import { Post } from './../app.component';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-post-form',
@@ -9,26 +16,31 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class PostFormComponent implements OnInit {
   @Output() onAdd: EventEmitter<Post> = new EventEmitter<Post>();
 
+  @ViewChild('titleInput', { static: false }) inputRef: ElementRef; // получаем  #titleInput
+
   title = '';
   text = '';
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): // если в этом методе хотим обратиться к inputRef, то надо прописать static: true в 19 строке
+  void {}
 
   addPost() {
     if (this.text.trim() && this.title.trim()) {
-      // trim очищает все пробелы и, если кроме них ничего нет, то тогда данный метод не пройдет
       const post: Post = {
         title: this.title,
         text: this.text,
       };
-
-      this.onAdd.emit(post); //  emit наследуется от EventEmitter и отправляет данные в главный компонент
-
+      this.onAdd.emit(post);
       console.log('New Post: ', post);
-
-      this.text = this.title = ''; // обнуление
+      this.text = this.title = '';
     }
+  }
+
+  focusTitle() {
+    console.log(this.inputRef); // inputRef.nativeElement в Angular то же самое что document.querySelector в js
+
+    this.inputRef.nativeElement.focus();
   }
 }

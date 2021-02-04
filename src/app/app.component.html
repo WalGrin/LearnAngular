@@ -1,6 +1,8 @@
 <div class="container">
   <h1>Angular Components</h1>
 
+  <h2>Subheader</h2>
+
   <app-post-form (onAdd)="updatePosts($event)">
     // слушаем данное событие, а $event говорит передать параметры, которые
     приходят от другого компонента
@@ -8,5 +10,12 @@
 
   <hr />
 
-  <app-post *ngFor="let p of posts" [post]="p"></app-post>
+  <app-post *ngFor="let p of posts" [post]="p">
+    <div #info>
+      <small *ngIf="p.text.length > 10; else short">Пост длинный</small>
+      <ng-template #short>
+        <small>Пост короткий</small>
+      </ng-template>
+    </div>
+  </app-post>
 </div>
