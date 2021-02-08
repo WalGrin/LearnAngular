@@ -1,17 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-
 import { FormsModule } from '@angular/forms';
-import { PostFormComponent } from './post-form/post-form.component';
-import { PostComponent } from './post/post.component';
 import { CommonModule } from '@angular/common';
+import { StyleDirective } from './directives/style.directive';
+import { IfnotDirective } from './directives/ifnot.directive';
 
 @NgModule({
-  declarations: [AppComponent, PostFormComponent, PostComponent], // регистрация компонентов
+  declarations: [AppComponent, StyleDirective, IfnotDirective],
   imports: [BrowserModule, FormsModule, CommonModule],
   providers: [],
-  bootstrap: [AppComponent], // указываем какой компонент является главным, который нужно запускать
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
