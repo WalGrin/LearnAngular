@@ -1,35 +1,5 @@
 <div class="container">
-  <h1>Angular Directives</h1>
+  <h1>Angular Pipes</h1>
 
-  <p
-    appStyle="red"
-    [dStyle]="{ border: '1px solid blue', borderRadius: '5px' }"
-  >
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, cupiditate.
-  </p>
-
-  <button class="btn" (click)="isVisible = !isVisible">Toogle</button>
-
-  <!-- <div *ngIf="isVisible" class="wrap">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam ipsum
-      praesentium saepe aliquam modi vel rem odio ab nobis at!
-    </p>
-  </div> -->
-
-  <!-- <ng-template [ngIf]="isVisible">
-    <div class="wrap">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam ipsum
-        praesentium saepe aliquam modi vel rem odio ab nobis at!
-      </p>
-    </div>
-  </ng-template> -->
-
-  <div class="wrap" *appIfnot="!isVisible">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam ipsum
-      praesentium saepe aliquam modi vel rem odio ab nobis at!
-    </p>
-  </div>
+  <p>Wait for it ...{{ p | async }}</p>
 </div>

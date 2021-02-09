@@ -3,11 +3,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { StyleDirective } from './directives/style.directive';
-import { IfnotDirective } from './directives/ifnot.directive';
-
+import { ExMarksPipe } from './pipes/ex-marks.pipe';
 @NgModule({
-  declarations: [AppComponent, StyleDirective, IfnotDirective],
+  declarations: [AppComponent, ExMarksPipe],
   imports: [BrowserModule, FormsModule, CommonModule],
   providers: [],
   bootstrap: [AppComponent],
