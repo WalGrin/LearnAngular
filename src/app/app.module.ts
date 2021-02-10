@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ExMarksPipe } from './pipes/ex-marks.pipe';
+import { AppCounterService } from './services/app-counter.servise';
+import { CounterComponent } from './counter/counter.component';
 @NgModule({
-  declarations: [AppComponent, ExMarksPipe],
+  declarations: [AppComponent, CounterComponent],
   imports: [BrowserModule, FormsModule, CommonModule],
   providers: [],
   bootstrap: [AppComponent],
