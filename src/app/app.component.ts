@@ -1,15 +1,59 @@
-import { LocalCounterService } from './services/local-counter.service';
-import { AppCounterService } from './services/app-counter.servise';
-import { Component } from '@angular/core';
+import { MyValidators } from './my.validators';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [LocalCounterService],
 })
-export class AppComponent {
-  constructor(
-    public appCounterService: AppCounterService,
-    public localCounterService: LocalCounterService
-  ) {}
+export class AppComponent implements OnInit {
+  form: FormGroup;
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      email: new FormControl(
+        '',
+        [Validators.email, Validators.required, MyValidators.restrictedEmails],
+        MyValidators.uniqEmail // асинхронные передаются третьим параметром
+      ),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      adress: new FormGroup({
+        country: new FormControl('ru'),
+        city: new FormControl('', Validators.required),
+      }),
+      skills: new FormArray([]),
+    });
+  }
+
+  submit() {
+    if (this.form.valid) {
+      console.log('Form: ', this.form);
+      const formData = { ...this.form.value };
+
+      console.log('Form Data: ', formData);
+
+      this.form.reset(); // Очистка формы
+    }
+  }
+
+  setCapital() {
+    const cityMap = {
+      ru: 'Москва',
+      ua: 'Киев',
+      by: 'Минск',
+    };
+
+    const city = cityMap[this.form.get('adress').get('country').value];
+    this.form.patchValue({
+      adress: { city: city },
+    });
+  }
+
+  addSkill() {
+    const control = new FormControl('', Validators.required);
+    (this.form.get('skills') as FormArray).push(control);
+  }
 }
