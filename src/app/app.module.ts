@@ -1,21 +1,29 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Provider } from '@angular/core';
+import { NgModule } from '@angular/core';
+
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor';
-
-const INTERSEPTOR_PROVIDER: Provider = {
-  provide: HTTP_INTERCEPTORS,
-  useClass: AuthInterceptor,
-  multi: true,
-};
+import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
+import { PostsComponent } from './posts/posts.component';
+import { PostComponent } from './post/post.component';
+import { AboutExtraComponent } from './about-extra/about-extra.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, FormsModule, CommonModule, HttpClientModule],
-  providers: [INTERSEPTOR_PROVIDER],
+  declarations: [
+    AppComponent,
+    AboutComponent,
+    HomeComponent,
+    PostsComponent,
+    PostComponent,
+    AboutExtraComponent,
+    ErrorPageComponent,
+  ],
+  imports: [BrowserModule, FormsModule, CommonModule, AppRoutingModule],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
