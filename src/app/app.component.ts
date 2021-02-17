@@ -1,35 +1,25 @@
-import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { ModalComponent } from './modal/modal.component';
-import { RefDirective } from './modal/ref.directive';
+import { Component } from '@angular/core';
+import { boxAnimation } from './animate/app.animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.css'],
+  animations: [boxAnimation],
 })
 export class AppComponent {
-  @ViewChild(RefDirective) reDir: RefDirective;
+  boxState = 'start';
+  visiable = true;
 
-  constructor(
-    private resolver: ComponentFactoryResolver,
-    private title: Title,
-    private meta: Meta
-  ) {
-    const t = title.getTitle();
-    console.log(t);
-    title.setTitle('App ComponPage');
-    meta.addTags([{ name: 'keywords', content: 'angular' }]);
+  animate() {
+    this.boxState = this.boxState === 'end' ? 'start' : 'end';
   }
-  showModal() {
-    const modalFactory = this.resolver.resolveComponentFactory(ModalComponent);
-    this.reDir.containerRef.clear();
 
-    const component = this.reDir.containerRef.createComponent(modalFactory);
+  animationStarted(event: AnimationEvent) {
+    console.log('animationStarted', event);
+  }
 
-    component.instance.title = 'Dynamic title';
-    component.instance.close.subscribe(() => {
-      this.reDir.containerRef.clear();
-    });
+  animationDone(event: AnimationEvent) {
+    console.log('animationDone', event);
   }
 }
